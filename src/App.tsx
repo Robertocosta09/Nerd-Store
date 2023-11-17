@@ -1,18 +1,18 @@
-
+import React from 'react';
 import './App.css';
-import NavBar from './Components/navbar';
+import {NavBar} from './Components/Navbar';
+import {CartWidget} from './Components/CartWidget';
+import {ItemListContainer} from './Components/ItemList';
+
 
 function App() {
 
-  const handleClick = () => {
-    console.log('Entrou')
-  }
   return (
-    <div className="App">
-    <NavBar/>
-
-        
-    </div>
+    <React.Fragment>
+      <NavBar />
+      <CartWidget/>
+      <ItemListContainer greeting={'Bem vindo a Nerd Store'}/>
+    </React.Fragment>
   );
 }
 
