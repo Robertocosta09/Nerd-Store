@@ -11,7 +11,7 @@ function App() {
     <div className="App">
     <NavBar/>
 
-        <button onClick={handleClick}>Teste</button>
+        
     </div>
   );
 }
