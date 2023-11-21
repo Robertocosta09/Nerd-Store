@@ -1,10 +1,14 @@
 import React from 'react';
+import ItemCount from '../ItemCount';
 
 interface ItemListContainerProps {
   greeting: string;
 }
 
 const ItemListContainer: React.FC<ItemListContainerProps> = ({ greeting }) => {
+  const handleAddToCart = (quantity: number) => {
+  
+  };
   return (
     <div className="container mx-auto mt-8 p-4 bg-gray-100">
       <h2 className="text-2xl font-bold text-gray-800">{greeting}</h2>
@@ -12,11 +16,11 @@ const ItemListContainer: React.FC<ItemListContainerProps> = ({ greeting }) => {
         <div className="border p-4">
           <h3 className="text-lg font-semibold mb-2">Colecionáveis</h3>
           <p>Pop Funk Harry Porter</p>
-          <button className="bg-blue-500 text-white px-2 py-1 mt-2">Adicionar ao Carrinho</button>
+          <ItemCount stock={10} onAdd={handleAddToCart} initial={0} />
         </div>
-        </div>
+      </div>
     </div>
   );
 };
 
-export {ItemListContainer};
+export { ItemListContainer };
