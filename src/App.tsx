@@ -6,7 +6,7 @@ import { ItemListContainer } from './Components/ItemList';
 import { Button } from './Components/Button';
 import { Input } from './Components/Input';
 import { Loading } from './Components/Loading';
-import { List } from './Components/List';
+import { ProductItem } from './Components/ProductItem';
 import { IRepo } from './Components/interface';
 
 function App() {
@@ -88,8 +88,8 @@ function App() {
           <Input setValue={setRepoName} />
           <Button title="Buscar" handleClick={handleClick} />
         </div>
-        {listRepo.map((item, index) => (
-          <List key={item.id} fullName={item.full_name} id={item.id} url={item.owner.avatar_url} />
+        {listRepo.map((item) => (
+          <ProductItem key={item.id} fullName={item.full_name} id={item.id} url={item.owner.avatar_url} onAddToCart={handleAddToCart} />
         ))}
       </div>
     </>
@@ -97,6 +97,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
