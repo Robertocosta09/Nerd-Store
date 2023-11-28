@@ -15,7 +15,7 @@ const NavBar: React.FC<NavBarProps> = ({ cartItems }) => {
         <li className="hover:bg-sky-700 rounded-lg cursor-pointer">Home</li>
         <li className="hover:bg-sky-700 rounded-lg cursor-pointer">Produtos</li>
         <li className="hover:bg-sky-700 rounded-lg cursor-pointer">Login</li>
-        <li className="text-gray-800">Carrinho ({cartItems})</li>
+        <li className="text-white"> ({cartItems})</li>
       </ul>
     </div>
   );

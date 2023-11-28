@@ -7,10 +7,6 @@ interface Props {
 
 
 const Loading: React.FC<Props> = ({ loading, nameScreen }) => {
-
-    console.log(loading, nameScreen);
-
-
     return (
         <>
             {loading && (
