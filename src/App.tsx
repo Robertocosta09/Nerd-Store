@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { NavBar } from './Components/Navbar';
 import { CartWidget } from './Components/CartWidget';
@@ -6,7 +6,6 @@ import { ItemListContainer } from './Components/ItemList';
 import { Button } from './Components/Button';
 import { Input } from './Components/Input';
 import { Loading } from './Components/Loading';
-import { List } from './Components/List';
 import { IRepo } from './Components/interface';
 
 function App() {
@@ -71,32 +70,26 @@ function App() {
         full_name: repoName,
         id: previous[previous.length - 1].id + 1,
         owner: {
-          avatar_url: 'https://avatars.githubusercontent.com/u/22986830?v=4'
-        }
-      }
+          avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+        },
+      },
     ]);
   };
 
   return (
     <>
-      <NavBar cartItems={0} />
+        <NavBar cartItems={0} />
+        <CartWidget cartItems={cartItems} />
       <Loading loading={isLoading} nameScreen="home" />
-      <CartWidget cartItems={cartItems} />
-      <ItemListContainer greeting={'Bem vindo a Nerd Store'}/>
       <div className="container mx-auto">
         <div className="flex mt-5">
           <Input setValue={setRepoName} />
           <Button title="Buscar" handleClick={handleClick} />
         </div>
-        {listRepo.map((item, index) => (
-          <List key={item.id} fullName={item.full_name} id={item.id} url={item.owner.avatar_url} />
-        ))}
       </div>
+      <ItemListContainer greeting={'Bem vindo a Nerd Store'} listRepo={listRepo} onAddToCart={handleAddToCart} />
     </>
   );
 }
 
 export default App;
-
-
-
