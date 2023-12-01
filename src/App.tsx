@@ -78,23 +78,18 @@ function App() {
 
   return (
     <>
-      <NavBar cartItems={0} />
+        <NavBar cartItems={0} />
+        <CartWidget cartItems={cartItems} />
       <Loading loading={isLoading} nameScreen="home" />
-      <CartWidget cartItems={cartItems} />
-      <ItemListContainer greeting={'Bem vindo a Nerd Store'} listRepo={listRepo} onAddToCart={handleAddToCart} />
       <div className="container mx-auto">
         <div className="flex mt-5">
           <Input setValue={setRepoName} />
           <Button title="Buscar" handleClick={handleClick} />
         </div>
       </div>
+      <ItemListContainer greeting={'Bem vindo a Nerd Store'} listRepo={listRepo} onAddToCart={handleAddToCart} />
     </>
   );
 }
 
 export default App;
-
-
-
-
-
