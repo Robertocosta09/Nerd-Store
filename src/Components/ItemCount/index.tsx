@@ -47,7 +47,7 @@ const ItemCount: React.FC<ItemCountProps> = ({ stock, initial, onAdd }) => {
       <button
         onClick={handleAddToCart}
         disabled={stock === 0 || count === 0 || count > stock}
-        className="bg-blue-500 text-white px-4 py-2 rounded"
+        className="bg-blue-500 text-white px-4 py-2 rounded flex"
       >
         Adicionar ao Carrinho
       </button>

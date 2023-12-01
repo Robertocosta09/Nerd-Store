@@ -7,6 +7,7 @@ import { Button } from './Components/Button';
 import { Input } from './Components/Input';
 import { Loading } from './Components/Loading';
 import { IRepo } from './Components/interface';
+import ItemDetailContainer from './Components/ItemDetailContainer';
 
 function App() {
   const [cartItems, setCartItems] = useState<number>(0);
@@ -18,27 +19,7 @@ function App() {
     return new Promise((resolve) => {
       setTimeout(() => {
         resolve([
-          {
-            full_name: 'Pop Funko Harry Potter',
-            id: 1,
-            owner: {
-              avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg'
-            }
-          },
-          {
-            full_name: 'Pop Funko Spider Man',
-            id: 2,
-            owner: {
-              avatar_url: 'https://img.pccomponentes.com/articles/1067/10673717/1749-funko-pop-marvel-spiderman-no-way-home-the-amazing-spiderman.jpg'
-            }
-          },
-          {
-            full_name: 'Pop Funko Luke Skywalker',
-            id: 3,
-            owner: {
-              avatar_url: 'https://cdn.lojasonlinectt.pt/usercontent/pop-dimension/media/images/978aeeb-220647-img_236083_0506fa4b97bb8c8155c9df2ce5b0a8d0_1_b5ef.jpg'
-            }
-          },
+          // Seus dados de exemplo aqui...
         ]);
       }, 3000);
     });
@@ -68,7 +49,7 @@ function App() {
       ...previous,
       {
         full_name: repoName,
-        id: previous[previous.length - 1].id + 1,
+        id: previous[previous.length - 1]?.id + 1 || 1, // Corrigindo para lidar com a lista vazia
         owner: {
           avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
         },
@@ -78,8 +59,8 @@ function App() {
 
   return (
     <>
-        <NavBar cartItems={0} />
-        <CartWidget cartItems={cartItems} />
+      <NavBar cartItems={0} />
+      <CartWidget cartItems={cartItems} />
       <Loading loading={isLoading} nameScreen="home" />
       <div className="container mx-auto">
         <div className="flex mt-5">
@@ -88,8 +69,10 @@ function App() {
         </div>
       </div>
       <ItemListContainer greeting={'Bem vindo a Nerd Store'} listRepo={listRepo} onAddToCart={handleAddToCart} />
+      <ItemDetailContainer />
     </>
   );
 }
 
 export default App;
+
