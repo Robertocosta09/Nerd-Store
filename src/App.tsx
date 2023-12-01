@@ -70,7 +70,7 @@ function App() {
         full_name: repoName,
         id: previous[previous.length - 1].id + 1,
         owner: {
-          avatar_url: 'https://avatars.githubusercontent.com/u/22986830?v=4',
+          avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
         },
       },
     ]);
@@ -82,10 +82,9 @@ function App() {
       <Loading loading={isLoading} nameScreen="home" />
       <CartWidget cartItems={cartItems} />
       <ItemListContainer greeting={'Bem vindo a Nerd Store'} listRepo={listRepo} onAddToCart={handleAddToCart} />
-      <Input setValue={setRepoName} />
-     <div className="container mx-auto">
+      <div className="container mx-auto">
         <div className="flex mt-5">
-       
+          <Input setValue={setRepoName} />
           <Button title="Buscar" handleClick={handleClick} />
         </div>
       </div>
