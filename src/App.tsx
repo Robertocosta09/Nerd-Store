@@ -15,14 +15,15 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [listRepo, setListRepo] = useState<IRepo[]>([]);
 
-  const getListRepo = (): Promise<IRepo[]> => {
-    return new Promise((resolve) => {
+  const getListRepo = (): Promise<Response> => {
+    return fetch('https://api.github.com/users/henriquesuel');
+   /* return new Promise((resolve) => {
       setTimeout(() => {
         resolve([
-          // Seus dados de exemplo aqui...
+         
         ]);
       }, 3000);
-    });
+    });*/
   };
 
   useEffect(() => {
@@ -30,9 +31,11 @@ function App() {
     const onMount = async () => {
       try {
         const resp = await getListRepo();
-        setListRepo(resp);
+        const resposta = await resp.json();
+        console.log()
+        /*setListRepo(resp);*/
       } catch (error) {
-        console.log('Deu ruim', error);
+        console.log('Ops, algo deu errado', error);
       } finally {
         setIsLoading(false);
       }
@@ -49,7 +52,7 @@ function App() {
       ...previous,
       {
         full_name: repoName,
-        id: previous[previous.length - 1]?.id + 1 || 1, // Corrigindo para lidar com a lista vazia
+        id: previous[previous.length - 1]?.id + 1 || 1, 
         owner: {
           avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
         },
