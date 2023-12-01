@@ -20,6 +20,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ id, fullName, url, onAddToCar
   );
 };
 
-export {ProductItem}
+export default ProductItem;
+
 
 

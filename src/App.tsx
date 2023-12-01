@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { NavBar } from './Components/Navbar';
 import { CartWidget } from './Components/CartWidget';
@@ -6,7 +6,6 @@ import { ItemListContainer } from './Components/ItemList';
 import { Button } from './Components/Button';
 import { Input } from './Components/Input';
 import { Loading } from './Components/Loading';
-import { ProductItem } from './Components/ProductItem';
 import { IRepo } from './Components/interface';
 
 function App() {
@@ -71,9 +70,9 @@ function App() {
         full_name: repoName,
         id: previous[previous.length - 1].id + 1,
         owner: {
-          avatar_url: 'https://avatars.githubusercontent.com/u/22986830?v=4'
-        }
-      }
+          avatar_url: 'https://avatars.githubusercontent.com/u/22986830?v=4',
+        },
+      },
     ]);
   };
 
@@ -82,21 +81,20 @@ function App() {
       <NavBar cartItems={0} />
       <Loading loading={isLoading} nameScreen="home" />
       <CartWidget cartItems={cartItems} />
-      <ItemListContainer greeting={'Bem vindo a Nerd Store'}/>
-      <div className="container mx-auto">
+      <ItemListContainer greeting={'Bem vindo a Nerd Store'} listRepo={listRepo} onAddToCart={handleAddToCart} />
+      <Input setValue={setRepoName} />
+     <div className="container mx-auto">
         <div className="flex mt-5">
-          <Input setValue={setRepoName} />
+       
           <Button title="Buscar" handleClick={handleClick} />
         </div>
-        {listRepo.map((item) => (
-          <ProductItem key={item.id} fullName={item.full_name} id={item.id} url={item.owner.avatar_url} onAddToCart={handleAddToCart} />
-        ))}
       </div>
     </>
   );
 }
 
 export default App;
+
 
 
 
