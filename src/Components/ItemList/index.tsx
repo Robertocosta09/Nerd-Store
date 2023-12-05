@@ -22,7 +22,7 @@ const ItemListContainer: React.FC<ItemListContainerProps> = ({ greeting, listRep
   );
 };
 
-export {ItemListContainer};
+export default ItemListContainer;
 
 
 
