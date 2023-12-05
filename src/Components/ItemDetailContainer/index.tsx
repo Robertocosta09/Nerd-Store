@@ -1,6 +1,6 @@
 // ItemDetailContainer.tsx
 import React, { useEffect, useState } from 'react';
-import ItemDetail from '../ItemDetail';
+import ItemDetail from '../ItemDetail'; 
 
 interface Item {
   title: string;
@@ -19,7 +19,7 @@ const ItemDetailContainer = () => {
           title: 'Colecionáveis Pop Funko',
           description: 'Pop Funko Harry Potter',
           price: 19.99,
-          pictureUrl: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg', 
+          pictureUrl: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
         });
       }, 2000);
     });
@@ -38,7 +38,8 @@ const ItemDetailContainer = () => {
   );
 };
 
-export default ItemDetailContainer;
+export { ItemDetailContainer };
+
 
 
 
