@@ -1,39 +1,104 @@
 // ItemDetailContainer.tsx
 import React, { useEffect, useState } from 'react';
-import ItemDetail from '../ItemDetail'; 
+import  ItemDetail  from '../ItemDetail';
+import { useParams } from 'react-router-dom';
 
-interface Item {
-  title: string;
+ export interface ItemsProps {
+  id: number;
+  full_name: string;
   description: string;
   price: number;
-  pictureUrl: string;
+  owner: {
+    avatar_url: string;
+  };
 }
 
 const ItemDetailContainer = () => {
-  const [item, setItem] = useState<Item | null>(null);
+  const [items, setItems] = useState<ItemsProps[]>([]);
+let id = useParams();
+let idNumber = Number(id)
 
-  const getItem = () => {
-    return new Promise<Item>((resolve) => {
+  const getData = (): Promise<ItemsProps[]> => {
+    return new Promise((resolve) => {
       setTimeout(() => {
-        resolve({
-          title: 'Colecionáveis Pop Funko',
-          description: 'Pop Funko Harry Potter',
+        return resolve([
+          {
+            id: 1,
+            full_name: 'Funko harry Potter',
+            description: 'Harry Potter do filme 4',
+            price: 19.99,
+            owner: {
+              avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+            },
+          },
+            {
+              id: 2,
+              full_name: 'Funko harry Potter',
+              description: 'Harry Potter do filme 4',
+              price: 19.99,
+              owner: {
+                avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+              },
+            },
+            {
+              id: 3,
+              full_name: 'Funko harry Potter',
+              description: 'Harry Potter do filme 4',
+              price: 19.99,
+              owner: {
+                avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+              },
+          },
+          {
+            id: 4,
+            full_name: 'Funko harry Potter',
+            description: 'Harry Potter do filme 4',
+            price: 19.99,
+            owner: {
+              avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+            },
+        },
+        {
+          id: 5,
+          full_name: 'Funko harry Potter',
+          description: 'Harry Potter do filme 4',
           price: 19.99,
-          pictureUrl: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
-        });
+          owner: {
+            avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+          },
+      },
+      {
+        id: 6,
+        full_name: 'Funko harry Potter',
+        description: 'Harry Potter do filme 4',
+        price: 19.99,
+        owner: {
+          avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+        },
+    },
+        ]);
       }, 2000);
     });
   };
 
   useEffect(() => {
-    getItem().then((result: Item) => {
-      setItem(result);
-    });
+    const onMount = async () => {
+      try {
+        const resp = await getData();
+        const filteredResp = resp.filter((item) => item.id ===idNumber)
+        setItems(filteredResp);
+      } catch (error) {
+        console.error('Erro', error);
+      }
+    };
+    onMount();
   }, []);
 
   return (
     <div className="container grid-4 mx-auto mt-8 p-4 bg-gray-100">
-      {item && <ItemDetail item={item} />}
+      {items.map((item) =>(
+        <ItemDetail item={item}/>
+      ))}
     </div>
   );
 };

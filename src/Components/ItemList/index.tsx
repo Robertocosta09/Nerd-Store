@@ -1,21 +1,105 @@
-// ItemListContainer.tsx
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProductItem from '../ProductItem';
-import { IRepo } from '../interface';
+
+export interface ItemsProps {
+  id: number;
+  full_name: string;
+  description: string;
+  price: number;
+  owner: {
+    avatar_url: string;
+  };
+}
 
 interface ItemListContainerProps {
   greeting: string;
-  listRepo: IRepo[];
   onAddToCart: (quantity: number) => void;
 }
 
-const ItemListContainer: React.FC<ItemListContainerProps> = ({ greeting, listRepo, onAddToCart }) => {
+const ItemListContainer: React.FC<ItemListContainerProps> = ({ greeting, onAddToCart }) => {
+  const [items, setItems] = useState<ItemsProps[]>([]);
+
+  const getData = (): Promise<ItemsProps[]> => {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        return resolve([
+          {
+            id: 1,
+            full_name: 'Funko harry Potter',
+            description: 'Harry Potter do filme 4',
+            price: 19.99,
+            owner: {
+              avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+            },
+          },
+            {
+              id: 2,
+              full_name: 'Funko harry Potter',
+              description: 'Harry Potter do filme 4',
+              price: 19.99,
+              owner: {
+                avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+              },
+            },
+            {
+              id: 3,
+              full_name: 'Funko harry Potter',
+              description: 'Harry Potter do filme 4',
+              price: 19.99,
+              owner: {
+                avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+              },
+          },
+          {
+            id: 4,
+            full_name: 'Funko harry Potter',
+            description: 'Harry Potter do filme 4',
+            price: 19.99,
+            owner: {
+              avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+            },
+        },
+        {
+          id: 5,
+          full_name: 'Funko harry Potter',
+          description: 'Harry Potter do filme 4',
+          price: 19.99,
+          owner: {
+            avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+          },
+      },
+      {
+        id: 6,
+        full_name: 'Funko harry Potter',
+        description: 'Harry Potter do filme 4',
+        price: 19.99,
+        owner: {
+          avatar_url: 'https://www.tradeinn.com/f/13767/137677043/funko-pop-harry-potter-quidditch.jpg',
+        },
+    },
+        ]);
+      }, 2000);
+    });
+  };
+
+  useEffect(() => {
+    const onMount = async () => {
+      try {
+        const resp = await getData();
+        setItems(resp);
+      } catch (error) {
+        console.error('Erro', error);
+      }
+    };
+    onMount();
+  }, []);
+
   return (
     <div className="container mx-auto mt-8 p-4 bg-gray-100">
       <h2 className="text-2xl font-bold text-gray-800">{greeting}</h2>
       <div className="grid-cols-4 gap-4 mt-4 flex">
-        {listRepo.map((item) => (
-          <ProductItem key={item.id} fullName={item.full_name} id={item.id} url={item.owner.avatar_url} onAddToCart={onAddToCart} />
+        {items.map((item) => (
+          <ProductItem key={item.id} fullName={item.full_name} id={item.id} src={item.owner.avatar_url} onAddToCart={onAddToCart} />
         ))}
       </div>
     </div>
@@ -23,6 +107,7 @@ const ItemListContainer: React.FC<ItemListContainerProps> = ({ greeting, listRep
 };
 
 export default ItemListContainer;
+
 
 
 
