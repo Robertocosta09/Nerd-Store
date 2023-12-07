@@ -1,53 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface ItemCountProps {
+  onAdd: (count: number) => void;
   stock: number;
-  initial: number;
-  onAdd: (quantity: number) => void;
 }
 
-const ItemCount: React.FC<ItemCountProps> = ({ stock, initial, onAdd }) => {
-  const [count, setCount] = useState(initial);
+const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
+  const [count, setCount] = useState(1);
 
-  const handleIncrease = () => {
+  useEffect(() => {
+    setCount(1); // Resetar o count quando o stock ou outros fatores mudam
+  }, [stock]);
+
+  const handleIncrement = () => {
     if (count < stock) {
       setCount(count + 1);
     }
   };
 
-  const handleDecrease = () => {
+  const handleDecrement = () => {
     if (count > 1) {
       setCount(count - 1);
     }
   };
 
   const handleAddToCart = () => {
-    if (count > 0 && count <= stock) {
-      onAdd(count);
-    }
+    onAdd(count);
   };
 
   return (
-    <div className="flex items-center space-x-4">
-      <button
-        onClick={handleDecrease}
-        disabled={count <= 1}
-        className="bg-gray-300 px-3 py-2 rounded"
-      >
+    <div>
+      <button onClick={handleDecrement} className="bg-gray-300 px-4 py-2 rounded">
         -
       </button>
-      <span className="text-xl">{count}</span>
-      <button
-        onClick={handleIncrease}
-        disabled={count >= stock}
-        className="bg-gray-300 px-3 py-2 rounded"
-      >
+      <span className="mx-4">{count}</span>
+      <button onClick={handleIncrement} className="bg-gray-300 px-4 py-2 rounded">
         +
       </button>
       <button
         onClick={handleAddToCart}
-        disabled={stock === 0 || count === 0 || count > stock}
-        className="bg-blue-500 text-white px-4 py-2 rounded flex"
+        disabled={stock === 0 || count === 0}
+        className={`${
+          stock === 0 || count === 0 ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500'
+        } text-white px-4 py-2 rounded`}
       >
         Adicionar ao Carrinho
       </button>
@@ -56,5 +51,11 @@ const ItemCount: React.FC<ItemCountProps> = ({ stock, initial, onAdd }) => {
 };
 
 export default ItemCount;
+
+
+
+
+
+
 
 
