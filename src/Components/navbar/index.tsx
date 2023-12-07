@@ -17,7 +17,6 @@ const NavBar: React.FC<NavBarProps> = ({ cartItems }) => {
         <li className="hover:bg-sky-700 rounded-lg cursor-pointer">Login</li>
         <li className="text-white"> ({cartItems})</li>
       </ul>
-      {/* Renderize o CartWidget aqui */}
       <CartWidget cartItems={cartItems} />
     </div>
   );

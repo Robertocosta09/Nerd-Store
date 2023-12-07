@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { NavBar } from '../../Navbar';
-import { CartWidget } from '../../CartWidget';
 import ItemListContainer from '../../ItemList'; // Adicione o caminho correto
 import { Button } from '../../Button';
 import { Input } from '../../Input';
@@ -54,7 +52,6 @@ const Home = () => {
 
   return (
     <>
-      <CartWidget cartItems={cartItems} />
       <Loading loading={isLoading} nameScreen="home" />
       <div className="container mx-auto">
         <div className="flex mt-5">

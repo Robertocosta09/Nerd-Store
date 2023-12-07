@@ -1,5 +1,4 @@
-
-
+// ProductItem.tsx
 import React from 'react';
 import ItemCount from '../ItemCount';
 
@@ -15,7 +14,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ id, fullName, url, onAddToCar
     <div key={id} className="border p-4 mb-4">
       <img src={url} alt={fullName} className="mb-2" />
       <h3 className="text-lg font-semibold">{fullName}</h3>
-      <ItemCount stock={10} onAdd={onAddToCart} initial={0} />
+      <ItemCount onAdd={onAddToCart} stock={10} />
     </div>
   );
 };
