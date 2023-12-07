@@ -59,7 +59,7 @@ const Home = () => {
           <Button title="Buscar" handleClick={handleClick} />
         </div>
       </div>
-      <ItemListContainer greeting={'Bem vindo a Nerd Store'} listRepo={listRepo} onAddToCart={handleAddToCart} />
+      <ItemListContainer greeting={'Bem vindo a Nerd Store'} onAddToCart={handleAddToCart} />
       <ItemDetailContainer />
     </>
   );

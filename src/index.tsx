@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Routers } from './Components/routers';
-import { CartWidget } from './Components/CartWidget';
-/*import { CartProvider } from './Components/context/cartContext';*/
+
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -11,7 +10,6 @@ const root = ReactDOM.createRoot(
 root.render(
   
   <>
-  <CartWidget cartItems={0} />
   <Routers />
   </>
 
