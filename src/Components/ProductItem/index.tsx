@@ -16,7 +16,7 @@ const ProductItem: React.FC<ProductItemProps> = ({ id, fullName, src, onAddToCar
       <img src={src} alt={fullName} className="mb-2" />
       <h3 className="text-lg font-semibold">{fullName}</h3>
       {/*<ItemCount onAdd={onAddToCart} stock={10} />*/}
-      <Link to={'/item/${id}'}>
+      <Link to={`/item/${id}`}>
       <button>Ver detalhes</button>
       </Link>
     
