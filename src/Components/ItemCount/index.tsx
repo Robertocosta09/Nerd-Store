@@ -9,7 +9,7 @@ const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
   const [count, setCount] = useState(1);
 
   useEffect(() => {
-    setCount(1); // Resetar o count quando o stock ou outros fatores mudam
+    setCount(1); 
   }, [stock]);
 
   const handleIncrement = () => {

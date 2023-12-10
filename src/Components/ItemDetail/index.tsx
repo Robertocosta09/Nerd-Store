@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import ItemCount from '../ItemCount';
 
-interface ItemDetailProps {
-  item: Item;
-}
-interface Item {
-  title: string;
+interface ItemProps {
+  id: number;
+  full_name: string;
   description: string;
   price: number;
-  pictureUrl: string;
+  owner: {
+    avatar_url: string;
+  };
 }
-
-const ItemDetail: React.FC<ItemDetailProps> = ({ item }) => {
+function ItemDetail({ item}: {item : ItemProps}){
   const [showItemCount, setShowItemCount] = useState(true);
   const [quantity, setQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+const {full_name, owner, description,price} = item
 
   const handleAddToCart = (count: number) => {
     setQuantity(count);
@@ -29,10 +29,9 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ item }) => {
 
   return (
     <div>
-      <img src={item.pictureUrl} alt={item.title} />
-      <h3>{item.title}</h3>
-      <p>{item.description}</p>
-      <p>Preço: ${item.price}</p>
+      <img src={owner.avatar_url} alt={full_name} />
+      <p>{description}</p>
+      <p>Preço: ${price}</p>
 
       {showItemCount && <ItemCount onAdd={handleAddToCart} stock={10} />}
 
