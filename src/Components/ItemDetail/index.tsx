@@ -28,7 +28,6 @@ function ItemDetail({ item }: { item: ItemProps }) {
   };
 
   const handleFinishPurchase = () => {
-    // Adicione lógica para redirecionar para "/cart"
     navigate('/cart');
   };
 

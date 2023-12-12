@@ -2,14 +2,25 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-interface CartItem {
-  // defina a estrutura do item do carrinho aqui
+interface ItemProps {
+  id: number;
+  full_name: string;
+  description: string;
+  price: number;
+  owner: {
+    avatar_url: string;
+  };
+  stock: number;
+}
+
+interface CartItem extends ItemProps {
+  quantity: number;
 }
 
 interface ICart {
   cartItems: CartItem[];
   setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
-  addItem: (item: CartItem, quantity: number) => void;
+  addItem: (item: ItemProps, quantity: number) => void;
   removeItem: (itemId: number) => void;
   clear: () => void;
   isInCart: (id: number) => boolean;
@@ -18,7 +29,7 @@ interface ICart {
 const cartContextDefault = {
   cartItems: [],
   setCartItems: () => null,
-  addItem: (item: CartItem, quantity: number) => {},
+  addItem: (item: ItemProps, quantity: number) => {},
   removeItem: (itemId: number) => {},
   clear: () => {},
   isInCart: (id: number) => false,
@@ -33,21 +44,32 @@ interface CartProviderProps {
 const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const addItem = (item: CartItem, quantity: number) => {
-    // lógica para adicionar um item ao carrinho
+  const addItem = (item: ItemProps, quantity: number) => {
+    const existingItem = cartItems.find((cartItem) => cartItem.id === item.id);
+
+    if (existingItem) {
+      setCartItems((prevItems) =>
+        prevItems.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, quantity: cartItem.quantity + quantity }
+            : cartItem
+        )
+      );
+    } else {
+      setCartItems((prevItems) => [...prevItems, { ...item, quantity }]);
+    }
   };
 
   const removeItem = (itemId: number) => {
-    // lógica para remover um item do carrinho
+    setCartItems((prevItems) => prevItems.filter((cartItem) => cartItem.id !== itemId));
   };
 
   const clear = () => {
-    // lógica para limpar o carrinho
+    setCartItems([]);
   };
 
   const isInCart = (id: number) => {
-    // lógica para verificar se um item está no carrinho
-    return false;
+    return cartItems.some((cartItem) => cartItem.id === id);
   };
 
   return (
@@ -69,5 +91,6 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 const useCart = () => useContext(CartContext);
 
 export { useCart, CartProvider };
+
 
 
