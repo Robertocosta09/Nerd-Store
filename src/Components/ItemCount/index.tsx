@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+// ItemCount.tsx
+import React, { useState } from 'react';
 
 interface ItemCountProps {
   onAdd: (count: number) => void;
@@ -7,10 +8,6 @@ interface ItemCountProps {
 
 const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
   const [count, setCount] = useState(1);
-
-  useEffect(() => {
-    setCount(1); 
-  }, [stock]);
 
   const handleIncrement = () => {
     if (count < stock) {
@@ -26,6 +23,7 @@ const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
 
   const handleAddToCart = () => {
     onAdd(count);
+    setCount(1); // Resetar o contador após adicionar ao carrinho
   };
 
   return (
@@ -51,6 +49,7 @@ const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
 };
 
 export default ItemCount;
+
 
 
 

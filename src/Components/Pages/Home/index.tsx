@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import ItemListContainer from '../../ItemList'; // Adicione o caminho correto
+import { useState, useEffect } from 'react';
+import ItemListContainer from '../../ItemList';
 import { Button } from '../../Button';
 import { Input } from '../../Input';
 import { Loading } from '../../Loading';
 import { IRepo } from '../../interface';
+import { CartProvider } from '../../context/cartContext';
 import { ItemDetailContainer } from '../../ItemDetailContainer';
 
 const Home = () => {
   const [repoName, setRepoName] = useState<string>('')
   const [cartItems, setCartItems] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [listRepo, setListRepo] = useState<IRepo[]>([]);
+  const [, setListRepo] = useState<IRepo[]>([]);
 
   const getListRepo = (): Promise<Response> => {
     return fetch('https://api.github.com/users/Robertocosta09');
@@ -51,6 +52,7 @@ const Home = () => {
 
 
   return (
+    <CartProvider>
     <>
       <Loading loading={isLoading} nameScreen="home" />
       <div className="container mx-auto">
@@ -62,6 +64,7 @@ const Home = () => {
       <ItemListContainer greeting={'Bem vindo a Nerd Store'} onAddToCart={handleAddToCart} />
       <ItemDetailContainer />
     </>
+    </CartProvider>
   );
 }
 

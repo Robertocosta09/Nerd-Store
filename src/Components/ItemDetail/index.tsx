@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ItemCount from '../ItemCount';
 
 interface ItemProps {
@@ -9,22 +10,26 @@ interface ItemProps {
   owner: {
     avatar_url: string;
   };
+  stock: number;
 }
-function ItemDetail({ item}: {item : ItemProps}){
+
+function ItemDetail({ item }: { item: ItemProps }) {
   const [showItemCount, setShowItemCount] = useState(true);
   const [quantity, setQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-const {full_name, owner, description,price} = item
 
-  const handleAddToCart = (count: number) => {
+  const { id, full_name, owner, description, price, stock } = item;
+  const navigate = useNavigate();
+
+  const handleAddToCartClick = (count: number) => {
     setQuantity(count);
     setShowItemCount(false);
-    setTotalPrice(count * item.price);
+    setTotalPrice(count * price);
   };
 
   const handleFinishPurchase = () => {
-  
-    window.location.href = '/cart';
+    // Adicione lógica para redirecionar para "/cart"
+    navigate('/cart');
   };
 
   return (
@@ -33,7 +38,7 @@ const {full_name, owner, description,price} = item
       <p>{description}</p>
       <p>Preço: ${price}</p>
 
-      {showItemCount && <ItemCount onAdd={handleAddToCart} stock={10} />}
+      {showItemCount && <ItemCount onAdd={handleAddToCartClick} stock={stock} />}
 
       {quantity > 0 && (
         <div>
@@ -46,9 +51,11 @@ const {full_name, owner, description,price} = item
       )}
     </div>
   );
-};
+}
 
 export default ItemDetail;
+
+
 
 
 
