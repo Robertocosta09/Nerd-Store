@@ -1,38 +1,73 @@
-import React, { createContext, useContext, useState, ReactNode, Dispatch, SetStateAction } from "react";
+
+
+import React, { createContext, useContext, useState, ReactNode } from 'react';
+
+interface CartItem {
+  // defina a estrutura do item do carrinho aqui
+}
 
 interface ICart {
-  isCart: boolean;
-  setIsCart: Dispatch<SetStateAction<boolean>>;
+  cartItems: CartItem[];
+  setCartItems: React.Dispatch<React.SetStateAction<CartItem[]>>;
+  addItem: (item: CartItem, quantity: number) => void;
+  removeItem: (itemId: number) => void;
+  clear: () => void;
+  isInCart: (id: number) => boolean;
 }
 
 const cartContextDefault = {
-  isCart: false,
-  setIsCart: () => null,
+  cartItems: [],
+  setCartItems: () => null,
+  addItem: (item: CartItem, quantity: number) => {},
+  removeItem: (itemId: number) => {},
+  clear: () => {},
+  isInCart: (id: number) => false,
 };
 
 const CartContext = createContext<ICart>(cartContextDefault);
 
-interface IProvider {
+interface CartProviderProps {
   children: ReactNode;
 }
 
-const CartProvider: React.FC<IProvider> = ({ children }) => {
-  const [isCart, setIsCart] = useState<boolean>(false);
+const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const contextValue: ICart = {
-    isCart,
-    setIsCart,
+  const addItem = (item: CartItem, quantity: number) => {
+    // lógica para adicionar um item ao carrinho
   };
 
-  return <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>;
+  const removeItem = (itemId: number) => {
+    // lógica para remover um item do carrinho
+  };
+
+  const clear = () => {
+    // lógica para limpar o carrinho
+  };
+
+  const isInCart = (id: number) => {
+    // lógica para verificar se um item está no carrinho
+    return false;
+  };
+
+  return (
+    <CartContext.Provider
+      value={{
+        cartItems,
+        setCartItems,
+        addItem,
+        removeItem,
+        clear,
+        isInCart,
+      }}
+    >
+      {children}
+    </CartContext.Provider>
+  );
 };
 
-const useCart = () => {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
-};
+const useCart = () => useContext(CartContext);
 
 export { useCart, CartProvider };
+
+
