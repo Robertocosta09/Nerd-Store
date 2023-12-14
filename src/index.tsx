@@ -2,8 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Routers } from './Components/routers';
+/*import { initializeApp } from "firebase/app";
 
+const firebaseConfig = {
+  apiKey: "AIzaSyCra1Xf0WeWYoVbku7Qg3dpIYNKi82hLp0",
+  authDomain: "nerd-store-coderhouse.firebaseapp.com",
+  projectId: "nerd-store-coderhouse",
+  storageBucket: "nerd-store-coderhouse.appspot.com",
+  messagingSenderId: "384900068279",
+  appId: "1:384900068279:web:0aa433d9392b70ca596e32"
+};
 
+const app = initializeApp(firebaseConfig);
+*/
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

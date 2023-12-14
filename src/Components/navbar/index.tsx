@@ -2,7 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { CartWidget } from "../../Components/CartWidget"; 
-
+ 
 interface NavBarProps {
   cartItems: number;
 }

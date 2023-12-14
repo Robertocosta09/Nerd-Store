@@ -14,6 +14,7 @@ interface ItemProps {
 }
 
 interface CartItem extends ItemProps {
+  name: ReactNode;
   quantity: number;
 }
 
@@ -53,10 +54,10 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           cartItem.id === item.id
             ? { ...cartItem, quantity: cartItem.quantity + quantity }
             : cartItem
-        )
+        ) as CartItem[] 
       );
     } else {
-      setCartItems((prevItems) => [...prevItems, { ...item, quantity }]);
+      setCartItems((prevItems) => [...prevItems, { ...item, quantity }] as CartItem[]); // Garantindo que o array retornado seja de CartItem
     }
   };
 
@@ -91,6 +92,7 @@ const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 const useCart = () => useContext(CartContext);
 
 export { useCart, CartProvider };
+
 
 
 
