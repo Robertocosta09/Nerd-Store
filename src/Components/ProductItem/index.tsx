@@ -13,9 +13,9 @@ interface ProductItemProps {
 const ProductItem: React.FC<ProductItemProps> = ({ id, fullName, src, onAddToCart }) => {
   return (
     <div key={id} className="border p-4 mb-4">
-      <img src={src} alt={fullName} className="mb-2" />
+      <img src={src} alt={fullName} className="mb-2 w-48" />
       <h3 className="text-lg font-semibold">{fullName}</h3>
-      {<ItemCount onAdd={onAddToCart} stock={10} />}
+      {<ItemCount onAdd={onAddToCart} stock={10} isStockZero={false} />}
       <Link to={`/item/${id}`}>
       <button>Ver detalhes</button>
       </Link>

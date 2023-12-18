@@ -1,13 +1,21 @@
 // ItemCount.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface ItemCountProps {
   onAdd: (count: number) => void;
   stock: number;
+  isStockZero: boolean;
 }
 
-const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
+const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock, isStockZero }) => {
   const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    // Resetar o contador se o estoque mudar para zero
+    if (isStockZero) {
+      setCount(1);
+    }
+  }, [isStockZero]);
 
   const handleIncrement = () => {
     if (count < stock) {
@@ -28,18 +36,18 @@ const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
 
   return (
     <div>
-      <button onClick={handleDecrement} className="bg-gray-300 px-4 py-2 rounded">
+      <button onClick={handleDecrement} className="bg-gray-300 px-4 py-2 rounded" disabled={isStockZero}>
         -
       </button>
       <span className="mx-4">{count}</span>
-      <button onClick={handleIncrement} className="bg-gray-300 px-4 py-2 rounded">
+      <button onClick={handleIncrement} className="bg-gray-300 px-4 py-2 rounded" disabled={isStockZero}>
         +
       </button>
       <button
         onClick={handleAddToCart}
-        disabled={stock === 0 || count === 0}
+        disabled={isStockZero || count === 0}
         className={`${
-          stock === 0 || count === 0 ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500'
+          isStockZero ? 'bg-gray-500 cursor-not-allowed' : 'bg-blue-500'
         } text-white px-4 py-2 rounded`}
       >
         Adicionar ao Carrinho
@@ -49,6 +57,7 @@ const ItemCount: React.FC<ItemCountProps> = ({ onAdd, stock }) => {
 };
 
 export default ItemCount;
+
 
 
 

@@ -14,17 +14,19 @@ interface ItemProps {
 }
 
 function ItemDetail({ item }: { item: ItemProps }) {
+  const {full_name, owner, description, price, stock } = item;
   const [showItemCount, setShowItemCount] = useState(true);
   const [quantity, setQuantity] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
-
-  const { id, full_name, owner, description, price, stock } = item;
+  const [currentStock, setCurrentStock] = useState(stock)
+  
   const navigate = useNavigate();
 
   const handleAddToCartClick = (count: number) => {
     setQuantity(count);
-    setShowItemCount(false);
+    /*setShowItemCount(false);*/
     setTotalPrice(count * price);
+    setCurrentStock(currentStock-count)
   };
 
   const handleFinishPurchase = () => {
@@ -36,8 +38,10 @@ function ItemDetail({ item }: { item: ItemProps }) {
       <img src={owner.avatar_url} alt={full_name} />
       <p>{description}</p>
       <p>Preço: ${price}</p>
+      <p>Quantidade em estoque:{currentStock}</p>
 
-      {showItemCount && <ItemCount onAdd={handleAddToCartClick} stock={stock} />}
+      <ItemCount onAdd={handleAddToCartClick} stock={currentStock} isStockZero={currentStock === 0} />
+
 
       {quantity > 0 && (
         <div>

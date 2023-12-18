@@ -92,7 +92,7 @@ let idNumber = Number(id.id)
   }, []);
 
   return (
-    <div className="container grid-4 mx-auto mt-8 p-4 bg-gray-100">
+    <div className="container grid-4 mx-auto mt-8 p-4 bg-gray-100 w-80">
       {items.map((item) =>(
         <ItemDetail item={item} key={item.id}/>
       ))}
